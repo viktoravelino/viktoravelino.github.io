@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PZ3ZXV7J5E"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-PZ3ZXV7J5E");
+    </script>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is Viktor's personal webpage that shows a basic personal information."
+    />
+    <meta
+      name="keywords"
+      content="viktor, avelino, personal, webpage, portfolio"
+    />
+    <meta name="author" content="Viktor Avelino" />
+
     <link rel="stylesheet" href="style.css" />
     <title>Viktor Avelino</title>
   </head>
 
   <body>
-    <img class="cover" src="img/coverimage.jpg" alt="Cover" />
+    <header>
+      <img class="cover" src="img/coverimage.jpg" alt="Cover" />
 
-    <div class="avatar">
-      <img src="img/photo.jpg" alt="userPhoto" />
-      <!-- <div class="photo"></div> -->
-      <div class="userName">Viktor Avelino</div>
-    </div>
+      <div class="avatar">
+        <img src="img/photo.jpg" alt="userPhoto" />
+        <!-- <div class="photo"></div> -->
+        <div class="userName">Viktor Avelino</div>
+      </div>
+    </header>
 
-    <div class="content">
+    <main class="content">
       <div class="card">
         <h3>About me</h3>
         <p>
@@ -78,6 +105,6 @@
         <p>- CS50 - Harvard</p>
         <p>- CS50 Web Programming with Python and JavaScript - Harvard</p>
       </div>
-    </div>
+    </main>
   </body>
 </html>

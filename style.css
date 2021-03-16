@@ -78,12 +78,19 @@ body {
 }
 
 .content .card .socialMedia {
-  width: 161px;
+  border-radius: 5px;
+  width: 175px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 8px 0px;
+  margin: 5px 0px;
+  padding: 5px;
+  /* box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2); */
+}
+
+.content .card .socialMedia:hover {
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 .content .card .socialMedia img {
@@ -96,7 +103,12 @@ body {
   color: black;
 }
 .content .card .socialMedia a::after {
-  color: black;
+  /* color: black; */
+}
+
+.content .card .socialMedia a:hover {
+  color: blue;
+  font-weight: bold;
 }
 
 .content .card .institution {
