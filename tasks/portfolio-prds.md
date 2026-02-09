@@ -91,7 +91,7 @@ interface SkillCategory {
 
 ---
 
-## PRD 3: Work Experience Section (Timeline)
+## PRD 3: Work Experience Section (Timeline) `passes: true`
 
 **Overview**: Reverse-chronological vertical timeline.
 

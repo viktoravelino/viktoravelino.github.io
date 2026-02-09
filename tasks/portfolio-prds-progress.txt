@@ -9,6 +9,8 @@
 - **Build check**: Always run `npm run build` to verify — no linter/tests configured yet.
 - **Scroll reveal pattern**: Shared `useScrollReveal` hook in `src/hooks/use-scroll-reveal.ts` + CSS classes `scroll-reveal` / `scroll-reveal-visible` in global.css. Use `--delay` CSS variable for stagger (same pattern as hero). Apply to any section that needs scroll-triggered animations.
 - **React sections with client:visible**: Interactive sections (skills, experience, projects) use React components with `client:visible` directive in Astro — only hydrates when scrolled into view.
+- **Timeline pattern**: Per-item scroll reveals (each TimelineItem gets its own `useScrollReveal` ref) vs. section-level (SkillsSection uses one ref for all cards). Use per-item when items are spaced far apart vertically.
+- **Badge component**: Installed via `npx shadcn@latest add badge --yes`. Use `variant="secondary"` for tech tags.
 
 ---
 
@@ -49,4 +51,26 @@
   - shadcn Card component installs cleanly via `npx shadcn@latest add card --yes`
   - Skills data uses Lucide icon components directly (not strings) — `icon: Code2` not `icon: "Code2"`
   - The `font-serif` class (Instrument Serif) works well for section headings, maintaining consistency with the hero
+---
+
+## 2026-02-09 - PRD 3: Work Experience Section (Timeline)
+- Implemented vertical timeline with alternating left/right cards on desktop, left-aligned on mobile
+- Files created:
+  - `src/data/experience.ts` — experience entries data (3 placeholder entries with company, role, dates, bullets, technologies)
+  - `src/components/timeline-item.tsx` — timeline item with marker, connecting line, card with badges; per-item scroll reveal
+  - `src/components/sections/experience-section.tsx` — section wrapper with heading and timeline container
+  - `src/components/ui/badge.tsx` — shadcn Badge component (installed via `npx shadcn@latest add badge`)
+- Files modified:
+  - `src/pages/index.astro` — added `<ExperienceSection client:visible />` below SkillsSection
+  - `tasks/portfolio-prds.md` — marked PRD 3 as `passes: true`
+- **Design choices**:
+  - Desktop uses CSS grid `grid-cols-[1fr_auto_1fr]` for center-aligned timeline with alternating cards
+  - Mobile uses flexbox with marker + line on the left, card on the right
+  - Current role ("Present") gets a pulsing outer ring via `animate-pulse` on a scaled pseudo-element
+  - Bullet points use em dash (`—`) prefix for minimal aesthetic
+- **Learnings for future iterations:**
+  - Per-item `useScrollReveal` is better than section-level for vertically-spaced items — each card animates independently as it enters viewport
+  - The `md:hidden` / `hidden md:block` pattern works well for completely different mobile vs desktop layouts
+  - `font-mono` for date ranges gives nice contrast with the serif headings
+  - Badge `variant="secondary"` matches the dark theme well for tech tags
 ---

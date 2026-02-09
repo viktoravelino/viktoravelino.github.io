@@ -2,9 +2,11 @@
 import Layout from "@/layouts/main.astro";
 import HeroSection from "@/components/sections/hero-section.astro";
 import { SkillsSection } from "@/components/sections/skills-section";
+import { ExperienceSection } from "@/components/sections/experience-section";
 ---
 
 <Layout>
   <HeroSection />
   <SkillsSection client:visible />
+  <ExperienceSection client:visible />
 </Layout>
