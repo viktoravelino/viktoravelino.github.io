@@ -1,3 +1,46 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+- `npm run dev` - Start dev server
+- `npm run build` - Production build
+- `npm run preview` - Preview production build
+- `npx astro add <integration>` - Add Astro integrations
+- `npx shadcn@latest add <component>` - Add shadcn/ui components
+
+No test runner or linter is currently configured.
+
+## Architecture
+
+**Astro + React + Tailwind CSS v4 portfolio site**, deployed to GitHub Pages.
+
+- **Astro** handles static site generation and routing (`src/pages/`)
+- **React** is used for interactive island components (`.tsx` files)
+- **Tailwind CSS v4** via Vite plugin (not PostCSS) - configured in `astro.config.mjs`
+- **shadcn/ui** (new-york style) for UI components - config in `components.json`
+- **Path alias**: `@/` maps to `src/`
+
+### Key Directories
+
+- `src/pages/` - Astro pages and routes (`.astro`, `.md`)
+- `src/components/ui/` - shadcn/ui components (React/TSX)
+- `src/layouts/` - Astro layout wrappers
+- `src/lib/utils.ts` - `cn()` helper for merging Tailwind classes
+- `src/styles/global.css` - Tailwind imports + theme CSS variables (OKLch colors, light/dark themes)
+
+### Patterns
+
+- Astro components (`.astro`) for static content; React components (`.tsx`) for interactivity
+- CSS theming uses CSS variables with OKLch color format in `global.css`
+- shadcn/ui components use `class-variance-authority` for variants and `@radix-ui` primitives
+- Vite v6 is pinned via `overrides` in `package.json` to resolve version mismatch with Astro
+
+### Deployment
+
+GitHub Actions workflow (`.github/workflows/deploy.yml`) auto-deploys to GitHub Pages on push to `main` using `withastro/action@v5`.
+
 # Workflow Orchestration
 
 ## 1. Plan Mode Default
