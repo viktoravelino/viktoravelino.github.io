@@ -1,0 +1,30 @@
+## Codebase Patterns
+- **Layout**: Use `main.astro` layout wrapping all pages; it includes global CSS, meta tags, and `class="dark"` on `<html>`
+- **Fonts**: Google Fonts loaded in `main.astro` head — Instrument Serif (display/headings) + Geist (body text). Applied via inline `style` attribute on elements.
+- **Astro components for static sections**: Hero section is `.astro` since it's static content. React components only needed for interactive parts (e.g., SocialLinks needs `client:load` for lucide-react icons).
+- **Data files**: Keep section data in `src/data/<section>.ts` with typed exports. Import into both Astro and React components.
+- **CSS animations**: Hero uses CSS keyframe animations with `--delay` CSS variable for stagger (`hero-fade-in` class). Define keyframes + utility classes in `global.css`.
+- **shadcn Button `asChild`**: Use `asChild` prop with `<a>` tags for link buttons — avoids nesting `<button>` inside `<a>`.
+- **Tailwind v4**: Uses `@theme inline` block in global.css for custom theme values. No `tailwind.config.js` — everything is CSS-based.
+- **Build check**: Always run `npm run build` to verify — no linter/tests configured yet.
+
+---
+
+## 2026-02-09 - PRD 1: Hero Section
+- Implemented full hero section with editorial/refined monochrome design direction
+- Files created:
+  - `src/data/hero.ts` — hero content data (greeting, name, role, description, CTAs, socials)
+  - `src/components/social-links.tsx` — React component rendering social icon buttons via shadcn Button ghost variant
+  - `src/components/sections/hero-section.astro` — full hero layout with left-aligned editorial design
+- Files modified:
+  - `src/layouts/main.astro` — added `class="dark"` to html, meta/og tags, Google Fonts (Instrument Serif + Geist)
+  - `src/styles/global.css` — smooth scroll, hero-fade-in keyframes (with blur dissolve), hero-line-grow animation, glow pulse, grain texture overlay
+  - `src/pages/index.astro` — replaced placeholder with Layout + HeroSection composition
+- **Design choices**: Left-aligned editorial layout (not centered), Instrument Serif for name/role, Geist for body, decorative gradient line, ambient glow offset right, SVG grain texture
+- **Learnings for future iterations:**
+  - Instrument Serif italic works well for role/subtitle — creates nice contrast with the regular weight name
+  - `client:load` is needed for SocialLinks because lucide-react icons require JS hydration
+  - The `hero-grain::before` pseudo-element needs `pointer-events: none` and `z-index: 1` to not block interactions
+  - Stagger delay formula: `calc(var(--delay) * 0.15s + 0.2s)` gives a nice pace for 6-7 elements
+  - The layout removed the unused `content` prop from main.astro — future sections should not pass props to the layout
+---

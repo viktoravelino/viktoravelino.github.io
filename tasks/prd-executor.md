@@ -13,6 +13,7 @@ You are an autonomous coding agent working on a software project. Your task is t
 7. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
 8. Update the PRD to set `passes: true` for the completed story
 9. Append your progress to `portfolio-prds-progress.txt`
+10. make sure to use the skills available to you in the project, and note any new patterns or gotchas in the progress log for future iterations.
 
 ## Progress Report Format
 

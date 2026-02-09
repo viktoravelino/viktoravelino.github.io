@@ -1,15 +1,21 @@
 ---
 import '../styles/global.css';
-const { content } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<title>{content.title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+		<title>Viktor Avelino | Full-Stack Developer</title>
+		<meta name="description" content="Full-Stack Developer portfolio — modern web applications with clean code and great user experiences." />
+		<meta property="og:title" content="Viktor Avelino | Full-Stack Developer" />
+		<meta property="og:description" content="Full-Stack Developer portfolio — modern web applications with clean code and great user experiences." />
+		<meta property="og:type" content="website" />
 	</head>
 	<body>
 		<slot />

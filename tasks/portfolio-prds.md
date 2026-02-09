@@ -25,7 +25,7 @@ This project is a personal portfolio for a Full-Stack Developer, built with Astr
 
 ---
 
-## PRD 1: Hero Section
+## PRD 1: Hero Section `passes: true`
 
 **Overview**: Full-viewport intro establishing identity and role.
 
