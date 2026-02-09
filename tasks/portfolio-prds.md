@@ -60,7 +60,7 @@ interface HeroData {
 
 ---
 
-## PRD 2: Skills Section
+## PRD 2: Skills Section `passes: true`
 
 **Overview**: Categorized technical skills in a card grid.
 

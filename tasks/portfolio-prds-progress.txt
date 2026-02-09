@@ -7,6 +7,8 @@
 - **shadcn Button `asChild`**: Use `asChild` prop with `<a>` tags for link buttons — avoids nesting `<button>` inside `<a>`.
 - **Tailwind v4**: Uses `@theme inline` block in global.css for custom theme values. No `tailwind.config.js` — everything is CSS-based.
 - **Build check**: Always run `npm run build` to verify — no linter/tests configured yet.
+- **Scroll reveal pattern**: Shared `useScrollReveal` hook in `src/hooks/use-scroll-reveal.ts` + CSS classes `scroll-reveal` / `scroll-reveal-visible` in global.css. Use `--delay` CSS variable for stagger (same pattern as hero). Apply to any section that needs scroll-triggered animations.
+- **React sections with client:visible**: Interactive sections (skills, experience, projects) use React components with `client:visible` directive in Astro — only hydrates when scrolled into view.
 
 ---
 
@@ -27,4 +29,24 @@
   - The `hero-grain::before` pseudo-element needs `pointer-events: none` and `z-index: 1` to not block interactions
   - Stagger delay formula: `calc(var(--delay) * 0.15s + 0.2s)` gives a nice pace for 6-7 elements
   - The layout removed the unused `content` prop from main.astro — future sections should not pass props to the layout
+---
+
+## 2026-02-09 - PRD 2: Skills Section
+- Implemented categorized skills grid with scroll-reveal animations
+- Files created:
+  - `src/hooks/use-scroll-reveal.ts` — reusable Intersection Observer hook (threshold 0.1, triggerOnce)
+  - `src/data/skills.ts` — skill categories data (Frontend, Backend, Tools & DevOps) with Lucide icons
+  - `src/components/skill-category-card.tsx` — card component using shadcn Card with icon header + 2-col skill grid
+  - `src/components/sections/skills-section.tsx` — section layout with heading, responsive 3-col grid, scroll-reveal
+  - `src/components/ui/card.tsx` — shadcn Card component (installed via `npx shadcn@latest add card`)
+- Files modified:
+  - `src/styles/global.css` — added `scroll-reveal` keyframes and utility classes (fade-in + slide-up + blur, staggered via `--delay`)
+  - `src/pages/index.astro` — added `<SkillsSection client:visible />` below HeroSection
+  - `tasks/portfolio-prds.md` — marked PRD 2 as `passes: true`
+- **Learnings for future iterations:**
+  - The `scroll-reveal` / `scroll-reveal-visible` CSS pattern mirrors the hero's `hero-fade-in` approach but is triggered by JS (Intersection Observer) instead of on-load
+  - `useScrollReveal` hook observes a container ref — all children use the same `isVisible` state with staggered `--delay` values
+  - shadcn Card component installs cleanly via `npx shadcn@latest add card --yes`
+  - Skills data uses Lucide icon components directly (not strings) — `icon: Code2` not `icon: "Code2"`
+  - The `font-serif` class (Instrument Serif) works well for section headings, maintaining consistency with the hero
 ---

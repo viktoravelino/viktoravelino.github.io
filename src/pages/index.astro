@@ -1,8 +1,10 @@
 ---
 import Layout from "@/layouts/main.astro";
 import HeroSection from "@/components/sections/hero-section.astro";
+import { SkillsSection } from "@/components/sections/skills-section";
 ---
 
 <Layout>
   <HeroSection />
+  <SkillsSection client:visible />
 </Layout>
