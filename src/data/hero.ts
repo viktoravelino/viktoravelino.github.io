@@ -1,7 +1,7 @@
 import { Github, Linkedin } from "lucide-react";
 
 export const heroData = {
-  greeting: "Hey, I'm",
+  greeting: "Hi, my name is",
   name: "Viktor Avelino",
   role: "Full-Stack Developer",
   description:
