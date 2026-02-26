@@ -1,0 +1,79 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  description?: string;
+  source?: string;
+  image?: string;
+}
+
+const { url, title, description, source, image } = Astro.props;
+
+const domain = source || new URL(url).hostname.replace("www.", "");
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="article-card not-prose group block my-6 rounded-lg border border-border bg-card overflow-hidden transition-colors hover:bg-secondary/50"
+>
+  <div class="flex items-stretch">
+    {
+      image && (
+        <div class="hidden sm:block w-50 shrink-0">
+          <img
+            src={image}
+            alt=""
+            class="h-full w-full object-cover"
+          />
+        </div>
+      )
+    }
+    <div class="flex flex-col justify-center gap-1.5 p-4 min-w-0">
+      <span class="text-xs text-muted-foreground flex items-center gap-1.5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+        {domain}
+      </span>
+      <span class="font-medium text-foreground group-hover:text-foreground/80 transition-colors line-clamp-2">
+        {title}
+      </span>
+      {
+        description && (
+          <span class="text-sm text-muted-foreground line-clamp-2">
+            {description}
+          </span>
+        )
+      }
+    </div>
+    <div class="hidden sm:flex items-center pr-4 pl-2 text-muted-foreground group-hover:text-foreground transition-colors shrink-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M7 7h10v10"></path>
+        <path d="M7 17 17 7"></path>
+      </svg>
+    </div>
+  </div>
+</a>

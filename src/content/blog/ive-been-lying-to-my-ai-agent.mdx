@@ -12,6 +12,8 @@ Turns out I was basically giving my agent anxiety.
 
 ---
 
+import ArticleCard from "../../components/ArticleCard.astro";
+
 ## More Context, Worse Results
 
 There's a paper from ETH Zurich that came out this year where they actually benchmarked this — agents with no context file vs. agents with a developer-written `AGENTS.md`. The no-context agents got **33.5%** of tasks right. The ones with the carefully written context files? **29.6%**. Worse. And **20% more expensive** on top of that.
@@ -45,3 +47,21 @@ The fix everyone's landing on is kind of obvious in retrospect: write less. Way 
 The mental model shift is treating `AGENTS.md` not as "here's everything about our codebase" but as "here's the specific stuff that keeps tripping you up." A short, weird, living list of footguns. That's it.
 
 Mine is a lot shorter now.
+
+---
+
+## Further Reading
+
+<ArticleCard
+  url="https://arxiv.org/abs/2602.11988"
+  title="Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?"
+  description="A study from ETH Zurich finds that developer-written context files can actually decrease coding agent performance by 20% and increase costs by 20%."
+  source="arxiv.org"
+/>
+
+<ArticleCard
+  url="https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub"
+  title="ToxicSkills Study Finds 36% of AI Agent Skills Vulnerable to Prompt Injection"
+  description="Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise"
+  source="snyk.io"
+/>
