@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@400;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0a0a;
+    font-family: 'Syne', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .canvas {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+    top: -100px;
+    right: -80px;
+    filter: blur(40px);
+  }
+
+  .blob2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+    bottom: -60px;
+    left: 200px;
+    filter: blur(50px);
+  }
+
+  .timeline {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 340px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.18);
+  }
+
+  .timeline .entry {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .timeline .date {
+    color: rgba(168, 85, 247, 0.6);
+    white-space: nowrap;
+    min-width: 80px;
+  }
+
+  .timeline .event { display: block; }
+  .timeline .event.bright { color: rgba(255,255,255,0.4); }
+  .timeline .event.purple { color: rgba(168, 85, 247, 0.7); }
+  .timeline .event.dim { color: rgba(255,255,255,0.08); }
+  .timeline .event.blue { color: rgba(59, 130, 246, 0.6); }
+  .timeline .event.strike {
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .timeline-header {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timeline-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(168, 85, 247, 0.6);
+    display: inline-block;
+  }
+
+  .content {
+    position: absolute;
+    left: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 620px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(168, 85, 247, 0.9);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1.5px;
+    background: rgba(168, 85, 247, 0.9);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: rgba(168, 85, 247, 0.9);
+  }
+
+  .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .divider {
+    position: absolute;
+    left: 720px;
+    top: 60px;
+    bottom: 60px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent);
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 32px;
+    left: 72px;
+    right: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 20px;
+  }
+
+  .bottom-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.05em;
+  }
+
+  .bottom-right {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">Opinion · Feb 2026</div>
+    <h1>The life, death<br>& embarrassing<br><em>rebrand</em> of<br>vibe coding</h1>
+    <p class="sub">Born a meme. Crowned a dictionary word. Killed by its own creator.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-header">
+      <span class="timeline-dot"></span>
+      timeline.log
+    </div>
+    <div class="entry">
+      <span class="date">Feb 2025</span>
+      <span class="event bright">Karpathy coins "vibe coding"</span>
+    </div>
+    <div class="entry">
+      <span class="date">Mar 2025</span>
+      <span class="event">Google searches spike 6,700%</span>
+    </div>
+    <div class="entry">
+      <span class="date">Jun 2025</span>
+      <span class="event blue">25% of YC batch is 95% AI</span>
+    </div>
+    <div class="entry">
+      <span class="date">Sep 2025</span>
+      <span class="event purple">Production DB deleted live</span>
+    </div>
+    <div class="entry">
+      <span class="date">Nov 2025</span>
+      <span class="event dim">Devs 19% slower, feel 20% faster</span>
+    </div>
+    <div class="entry">
+      <span class="date">Dec 2025</span>
+      <span class="event">"Word of the Year" — Collins</span>
+    </div>
+    <div class="entry">
+      <span class="date">Jan 2026</span>
+      <span class="event dim">Torvalds admits vibe coding</span>
+    </div>
+    <div class="entry">
+      <span class="date">Feb 2026</span>
+      <span class="event strike">vibe coding</span>
+    </div>
+    <div class="entry">
+      <span class="date"></span>
+      <span class="event purple">→ "agentic engineering"</span>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">a eulogy in twelve months</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>

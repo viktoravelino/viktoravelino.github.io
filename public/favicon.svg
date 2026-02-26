@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <text x="64" y="92" text-anchor="middle" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="80" font-weight="700" letter-spacing="-4">VA</text>
+  <style>
+    text { fill: #000; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #fff; }
+    }
+  </style>
+</svg>

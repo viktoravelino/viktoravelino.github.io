@@ -1,0 +1,101 @@
+---
+const experiences = [
+  {
+    company: "IBM | Langflow",
+    role: "Software Engineer",
+    dates: "Nov 2025 - Present",
+    location: "Toronto, ON",
+    bullets: [
+      "Developed and maintained enterprise-level web applications using React and TypeScript",
+      "Collaborated with cross-functional teams to deliver scalable solutions following agile methodologies",
+      "Contributed to front-end architecture decisions and code quality improvements",
+    ],
+  },
+  {
+    company: "Tech Mahindra",
+    role: "Software Engineer",
+    dates: "Sep 2022 - Nov 2025",
+    location: "Toronto, ON (Remote)",
+    bullets: [
+      "Built a React-based Point of Sale system for AT&T from scratch using domain-driven architecture",
+      "Developed reusable Angular component library for PNC Bank meeting accessibility (WCAG) standards",
+      "Worked closely with UX designers and product owners to translate requirements into technical solutions",
+    ],
+  },
+  {
+    company: "Diario do Xingu",
+    role: "Frontend Developer",
+    dates: "Apr 2025 - May 2025",
+    location: "Brazil (Remote)",
+    bullets: [
+      "Developed responsive web interfaces using React and modern CSS frameworks",
+      "Implemented content management features and optimized page load performance",
+    ],
+  },
+  {
+    company: "Unicar",
+    role: "Full Stack Developer",
+    dates: "Aug 2022 - Mar 2023",
+    location: "Brazil (Remote)",
+    bullets: [
+      "Built a full-stack platform that connects users with certified expediters who handle vehicle-related bureaucracy on their behalf using React Native with Supabase backend",
+      "Integrated PagSeguro payment processing and PostgreSQL database management",
+      "Managed end-to-end development lifecycle from concept to deployment",
+    ],
+  },
+];
+---
+
+<section id="experience" class="py-24 bg-secondary/30">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-4">Experience</h2>
+    <p class="text-muted-foreground text-center mb-16 max-w-xl mx-auto">
+      My professional journey building software across different industries.
+    </p>
+
+    <div class="relative">
+      <div
+        class="absolute left-0 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border"
+      >
+      </div>
+
+      {
+        experiences.map((exp, i) => (
+          <div
+            class={`relative flex flex-col md:flex-row gap-6 md:gap-10 mb-12 last:mb-0 ${
+              i % 2 === 0 ? "md:flex-row-reverse" : ""
+            }`}
+          >
+            <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-1 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+
+            <div class={`md:w-1/2 ${i % 2 === 0 ? "md:text-right" : ""}`}>
+              <div
+                class={`pl-6 md:pl-0 border-l-2 md:border-l-0 border-border md:border-none ${
+                  i % 2 === 0 ? "md:pr-10" : "md:pl-10"
+                }`}
+              >
+                <div class="md:hidden absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full bg-primary border-2 border-background -translate-x-[calc(50%-0.5px)]" />
+                <h3 class="font-semibold text-lg">{exp.company}</h3>
+                <p class="text-primary/80 font-medium text-sm">{exp.role}</p>
+                <p class="text-muted-foreground text-sm mb-3">
+                  {exp.dates} &middot; {exp.location}
+                </p>
+                <ul
+                  class={`space-y-1.5 text-sm text-muted-foreground ${
+                    i % 2 === 0 ? "md:text-right" : ""
+                  }`}
+                >
+                  {exp.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="hidden md:block md:w-1/2" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

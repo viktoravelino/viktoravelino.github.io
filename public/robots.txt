@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://viktoravelino.com/sitemap-index.xml

@@ -1,0 +1,49 @@
+---
+const skillCategories = [
+  {
+    title: "Frontend",
+    skills: [
+      "React",
+      "React Native",
+      "Angular",
+      "Next.js",
+      "TypeScript",
+      "Redux",
+    ],
+  },
+  {
+    title: "Backend",
+    skills: ["Node.js", "NestJS", "ExpressJS", "Supabase"],
+  },
+  {
+    title: "Tools & Methods",
+    skills: ["Git", "Jira", "Azure DevOps", "Agile"],
+  },
+];
+---
+
+<section id="skills" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-4">Skills</h2>
+    <p class="text-muted-foreground text-center mb-16 max-w-xl mx-auto">
+      Technologies and tools I work with on a daily basis.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {
+        skillCategories.map((category) => (
+          <div class="rounded-xl border border-border bg-card p-6">
+            <h3 class="font-semibold text-lg mb-4">{category.title}</h3>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <span class="px-3 py-1.5 text-sm rounded-full bg-secondary text-secondary-foreground">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
