@@ -1,4 +1,5 @@
 ---
+import "@fontsource-variable/inter";
 import "../styles/global.css";
 
 interface Props {
@@ -20,6 +21,13 @@ const {
 const defaultOgImage = "/images/og-default.png";
 const ogImageUrl = new URL(ogImage ?? defaultOgImage, Astro.site ?? Astro.url.origin).href;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Viktor Avelino",
+  url: "https://viktoravelino.com",
+};
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -28,8 +36,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Viktor Avelino" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#252525" media="(prefers-color-scheme: dark)" />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -39,18 +52,16 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
     {ogType === "article" && <meta property="article:author" content="Viktor Avelino" />}
     {ogType === "article" && publishedDate && <meta property="article:published_time" content={publishedDate.toISOString()} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="alternate" type="application/rss+xml" title="Viktor Avelino's Blog" href="/rss.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <slot name="head" />
     <title>{title}</title>
     <script is:inline>
       const theme = localStorage.getItem("theme");
@@ -65,7 +76,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
       <script async is:inline data-astro-rerun src="https://analytics.viktoravelino.com/script.js" data-website-id="e09c61e7-69d7-4601-80fe-a14bf0490de1"></script>
     )}
   </head>
-  <body class="font-[Inter,sans-serif] bg-background text-foreground antialiased">
+  <body class="font-['Inter_Variable',sans-serif] bg-background text-foreground antialiased">
     <slot />
   </body>
 </html>
