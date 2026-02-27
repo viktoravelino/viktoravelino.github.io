@@ -5,197 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cover Image</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@400;700;800&display=swap');
+  @import url('base.css');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    width: 1200px;
-    height: 630px;
-    overflow: hidden;
-    background: #0a0a0a;
-    font-family: 'Syne', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  :root {
+    --accent-rgb: 220, 38, 38;
+    --accent2-rgb: 251, 146, 60;
+    --blob1-alpha: 0.25;
+    --blob2-alpha: 0.12;
+    --h1-size: 62px;
+    --sub-size: 14px;
+    --content-max-w: 640px;
+    --divider-left: 740px;
+    --panel-line-height: 1.7;
+    --panel-header-mb: 12px;
   }
 
-  .canvas {
-    width: 1200px;
-    height: 630px;
-    position: relative;
-    background: #0a0a0a;
-    overflow: hidden;
-  }
-
-  /* Grid background */
-  .grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Glowing red blob */
-  .blob {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, transparent 70%);
-    top: -100px;
-    right: -80px;
-    filter: blur(40px);
-  }
-
-  .blob2 {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(251, 146, 60, 0.12) 0%, transparent 70%);
-    bottom: -60px;
-    left: 200px;
-    filter: blur(50px);
-  }
-
-  /* Broken/glitched file block on the right */
-  .file-block {
-    position: absolute;
-    right: 80px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 340px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.18);
-  }
-
-  .file-block .line { display: block; }
-  .file-block .line.red { color: rgba(220, 38, 38, 0.7); }
-  .file-block .line.orange { color: rgba(251, 146, 60, 0.6); }
-  .file-block .line.dim { color: rgba(255,255,255,0.08); }
-  .file-block .line.bright { color: rgba(255,255,255,0.35); }
-
-  .file-header {
-    font-size: 11px;
-    color: rgba(255,255,255,0.25);
-    margin-bottom: 12px;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .file-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(220, 38, 38, 0.6);
-    display: inline-block;
-  }
-
-  /* Strikethrough line overlay */
   .strike {
     position: absolute;
     left: 0; right: 0;
     height: 1.5px;
-    background: rgba(220, 38, 38, 0.5);
+    background: rgba(var(--accent-rgb), 0.5);
     top: 50%;
     pointer-events: none;
-  }
-
-  /* Main text area */
-  .content {
-    position: absolute;
-    left: 72px;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 640px;
-  }
-
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(220, 38, 38, 0.9);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .tag::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1.5px;
-    background: rgba(220, 38, 38, 0.9);
-  }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 62px;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-    margin-bottom: 24px;
-  }
-
-  h1 em {
-    font-style: normal;
-    color: rgba(220, 38, 38, 0.9);
-  }
-
-  .sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.6;
-    max-width: 480px;
-  }
-
-  /* Divider line */
-  .divider {
-    position: absolute;
-    left: 740px;
-    top: 60px;
-    bottom: 60px;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent);
-  }
-
-  /* Bottom bar */
-  .bottom {
-    position: absolute;
-    bottom: 32px;
-    left: 72px;
-    right: 72px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 20px;
-  }
-
-  .bottom-left {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.05em;
-  }
-
-  .bottom-right {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
   }
 </style>
 </head>
@@ -213,9 +44,9 @@
 
   <div class="divider"></div>
 
-  <div class="file-block">
-    <div class="file-header">
-      <span class="file-dot"></span>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
       AGENTS.md
     </div>
     <span class="line bright"># Project Context</span>
@@ -226,14 +57,14 @@
     <span class="line"> </span>
     <span class="line">## Testing</span>
     <div style="position:relative; display:inline-block; width:100%">
-      <span class="line orange">Ensure 95% test coverage</span>
-      <span class="line orange">before touching any file.</span>
+      <span class="line accent2">Ensure 95% test coverage</span>
+      <span class="line accent2">before touching any file.</span>
       <div class="strike"></div>
     </div>
     <span class="line"> </span>
     <span class="line">## Database</span>
     <span class="line dim">We use SQLite for local dev.</span>
-    <span class="line red">⚠ agent replaced with MariaDB</span>
+    <span class="line accent">⚠ agent replaced with MariaDB</span>
     <span class="line"> </span>
     <span class="line dim">## Style</span>
     <span class="line dim">Follow existing conventions.</span>
