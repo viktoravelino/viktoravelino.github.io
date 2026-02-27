@@ -5,190 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cover Image</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@400;700;800&display=swap');
+  @import url('base.css');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    width: 1200px;
-    height: 630px;
-    overflow: hidden;
-    background: #0a0a0a;
-    font-family: 'Syne', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  :root {
+    --accent-rgb: 34, 197, 94;
+    --accent2-rgb: 16, 185, 129;
+    --blob1-alpha: 0.2;
+    --blob2-alpha: 0.1;
+    --h1-size: 72px;
+    --sub-size: 14px;
+    --panel-font-size: 13px;
   }
-
-  .canvas {
-    width: 1200px;
-    height: 630px;
-    position: relative;
-    background: #0a0a0a;
-    overflow: hidden;
-  }
-
-  .grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  .blob {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, transparent 70%);
-    top: -100px;
-    right: -80px;
-    filter: blur(40px);
-  }
-
-  .blob2 {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-    bottom: -60px;
-    left: 200px;
-    filter: blur(50px);
-  }
-
-  .code-block {
-    position: absolute;
-    right: 80px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 340px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.18);
-  }
-
-  .code-header {
-    font-size: 11px;
-    color: rgba(255,255,255,0.25);
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .code-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(34, 197, 94, 0.6);
-    display: inline-block;
-  }
-
-  .code-block .line { display: block; }
-  .code-block .line.green { color: rgba(34, 197, 94, 0.7); }
-  .code-block .line.dim { color: rgba(255,255,255,0.08); }
-  .code-block .line.bright { color: rgba(255,255,255,0.35); }
-  .code-block .line.comment { color: rgba(255,255,255,0.12); font-style: italic; }
 
   .cursor {
     display: inline-block;
     width: 8px;
     height: 16px;
-    background: rgba(34, 197, 94, 0.6);
+    background: rgba(var(--accent-rgb), 0.6);
     vertical-align: middle;
     margin-left: 2px;
-  }
-
-  .content {
-    position: absolute;
-    left: 72px;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 620px;
-  }
-
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(34, 197, 94, 0.9);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .tag::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1.5px;
-    background: rgba(34, 197, 94, 0.9);
-  }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 72px;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-    margin-bottom: 24px;
-  }
-
-  h1 em {
-    font-style: normal;
-    color: rgba(34, 197, 94, 0.9);
-  }
-
-  .sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.6;
-    max-width: 480px;
-  }
-
-  .divider {
-    position: absolute;
-    left: 720px;
-    top: 60px;
-    bottom: 60px;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent);
-  }
-
-  .bottom {
-    position: absolute;
-    bottom: 32px;
-    left: 72px;
-    right: 72px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 20px;
-  }
-
-  .bottom-left {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.05em;
-  }
-
-  .bottom-right {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
   }
 </style>
 </head>
@@ -206,16 +41,16 @@
 
   <div class="divider"></div>
 
-  <div class="code-block">
-    <div class="code-header">
-      <span class="code-dot"></span>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
       about.ts
     </div>
     <span class="line comment">// who am i</span>
     <span class="line bright">const engineer = {</span>
-    <span class="line green">  name: "Viktor Avelino",</span>
-    <span class="line green">  role: "Software Engineer",</span>
-    <span class="line green">  company: "IBM",</span>
+    <span class="line accent">  name: "Viktor Avelino",</span>
+    <span class="line accent">  role: "Software Engineer",</span>
+    <span class="line accent">  company: "IBM",</span>
     <span class="line">  stack: [</span>
     <span class="line">    "React",</span>
     <span class="line">    "TypeScript",</span>
