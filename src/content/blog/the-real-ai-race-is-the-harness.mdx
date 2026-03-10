@@ -1,0 +1,118 @@
+---
+title: "The Real AI Race Isn't the Model. It's the Harness."
+description: "Model quality still matters, but the real separation now is the scaffolding around it: context, tools, evals, testing, and feedback loops that let agents do reliable work."
+date: 2026-03-10
+tags: ["ai", "software-engineering", "opinion"]
+coverImage: "/images/blog/the-real-ai-race-is-the-harness.png"
+---
+
+import ArticleCard from "../../components/ArticleCard.astro";
+
+We've spent the last two years talking about AI coding tools like it's Formula 1 for model labs.
+
+Who's ahead. Which benchmark moved. Whether Model A is now 7% better than Model B at writing TypeScript nobody wants to maintain.
+
+Meanwhile, the teams actually getting weird amounts of leverage out of this stuff are doing something much less sexy.
+
+They're building better harnesses.
+
+Not better prompts. Not a more emotional `AGENTS.md`. Not a sacred collection of slash commands passed down by senior staff like medieval scripture. The harness. The whole environment around the model that makes reliable work possible.
+
+That's the part I think a lot of people are still underestimating.
+
+---
+
+## The Gap
+
+On **February 11, 2026**, OpenAI published a piece about building an internal product with **0 lines of manually written code**. Not "mostly AI-assisted." Literally no human-written code in the repo. They estimate the team built it in about **1/10th the time** it would have taken by hand, and the repo grew to roughly **a million lines of code** across app logic, tests, CI, docs, tooling, and observability.
+
+If that were the whole story, the obvious takeaway would be "wow, the model is incredible."
+
+But that's not really what the post says.
+
+The more interesting part is that their engineering effort shifted upward a layer. Less time writing code. More time designing environments, making the UI and logs legible to the agent, structuring repository knowledge, wiring in validation loops, and encoding taste so the agent could keep doing sane work at high throughput.
+
+Same thing on the Anthropic side.
+
+Their **2026 Agentic Coding Trends Report** has one stat that keeps ruining simplistic takes: developers say they now use AI in roughly **60%** of their work, but can "fully delegate" only **0-20%** of tasks.
+
+That gap is the whole game.
+
+If raw model capability were the only thing that mattered, that number should be climbing much faster. Instead, what we're seeing is that AI is everywhere in the workflow while humans are still deeply involved in almost all of it. Not because the models are bad. Because software work gets messy the minute it leaves the benchmark and enters a real repo with real history, real dependencies, real product ambiguity, and real ways to quietly break production on a Tuesday.
+
+Anthropic's post on long-running agent harnesses makes this painfully concrete.
+
+Out of the box, even a strong coding model would try to one-shot a whole app, run out of context halfway through, leave a half-built mess behind, and force the next session to reverse-engineer what just happened. Sometimes it would do the opposite and decide the project was finished because enough files existed to create the illusion of progress. Which, to be fair, is also how some startups operate.
+
+What improved performance wasn't magic. It was scaffolding.
+
+---
+
+## What the Harness Actually Is
+
+An initializer agent to set up the environment. A progress file so each new session had memory. A structured feature list so "done" meant something testable. Git commits at the end of each step. Browser automation so the agent could verify the app like a user instead of just squinting at code and declaring victory. In other words: fewer vibes, more infrastructure.
+
+This is why I think "which model should we use?" is starting to become the wrong first question.
+
+Not a useless question. The model obviously matters. A lot. If one model is dramatically better at tool use, planning, or debugging, that changes what's possible.
+
+But once you're operating with a model that's generally competent, the next bottleneck isn't usually intelligence in the abstract. It's whether the system around that intelligence is any good.
+
+---
+
+## The Wrong Question
+
+- Can the agent see the right context without drowning in stale nonsense?
+- Can it run the app?
+- Can it test the thing end-to-end?
+- Can it recover from a bad change?
+- Can it tell what "done" means?
+- Can it leave the environment cleaner than it found it?
+- Can it escalate when judgment is actually required?
+
+If the answer to those is no, then congratulations: you've built a very smart intern with amnesia, root access, and terrible supervision.
+
+OpenAI's write-up makes the same point in a slightly more elegant way. One of their big lessons was that a giant instruction file doesn't scale. Too much guidance turns into non-guidance. It rots. It crowds out the task. So instead of treating `AGENTS.md` like the encyclopedia, they treat it like a table of contents and keep the actual knowledge in structured, repository-local docs the agent can navigate.
+
+That's harness thinking.
+
+So is making logs, metrics, traces, screenshots, and UI state directly available to the agent. So is shifting review toward agent-to-agent checks for routine work and saving human attention for decisions that actually deserve a pulse. So is continuously turning review comments and bug reports into repository artifacts instead of leaving them trapped in Slack messages and human memory.
+
+The pattern here is pretty consistent: when the agent fails, the winning move is rarely "prompt harder." It's "what capability is missing from the environment?"
+
+That's a much more engineering-shaped question.
+
+---
+
+## Systems, Not Sorcery
+
+And honestly, it's a healthier one. It forces teams to stop treating AI output like sorcery and start treating it like a system. Systems need interfaces, memory, observability, evals, cleanup, and constraints. If your agent is flaky, there is a decent chance the problem is not that the model is dumb. The problem is that you've dropped it into a repo with bad maps, weak tests, missing context, and no guardrails, then acted surprised when it started free-climbing the architecture.
+
+The companies that pull ahead from here probably won't be the ones with access to some secret god-tier model six months before everyone else.
+
+They'll be the ones who learn how to build environments where decent models can compound.
+
+That's the race now.
+
+## Further Reading
+
+<ArticleCard
+  url="https://openai.com/index/harness-engineering/"
+  title="Harness engineering: leveraging Codex in an agent-first world"
+  description="OpenAI on building and shipping an internal product with zero manually-written code, and why the real work moved into scaffolding, feedback loops, and agent legibility."
+  source="OpenAI"
+/>
+
+<ArticleCard
+  url="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+  title="Effective harnesses for long-running agents"
+  description="Anthropic on why long-running coding agents need structured progress files, incremental work, clean handoffs, and end-to-end testing tools."
+  source="Anthropic"
+/>
+
+<ArticleCard
+  url="https://resources.anthropic.com/2026-agentic-coding-trends-report"
+  title="2026 Agentic Coding Trends Report"
+  description="Anthropic's report on how engineers are increasingly orchestrating agents rather than writing every line directly, while human oversight remains central."
+  source="Anthropic"
+/>
