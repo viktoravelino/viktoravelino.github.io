@@ -7,9 +7,28 @@ import Hero from "../components/Hero.astro";
 import Projects from "../components/Projects.astro";
 import Skills from "../components/Skills.astro";
 import Layout from "../layouts/Layout.astro";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Viktor Avelino",
+  jobTitle: "Software Engineer",
+  url: "https://viktoravelino.com",
+  sameAs: [
+    "https://linkedin.com/in/viktoravelino",
+    "https://github.com/viktoravelino",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "IBM",
+  },
+};
 ---
 
 <Layout title="Viktor Avelino | Software Engineer">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </Fragment>
   <Header />
   <main>
     <Hero />

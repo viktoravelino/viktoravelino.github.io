@@ -24,7 +24,10 @@ const domain = source || new URL(url).hostname.replace("www.", "");
         <div class="hidden sm:block w-50 shrink-0">
           <img
             src={image}
-            alt=""
+            alt={title}
+            width={200}
+            height={150}
+            loading="lazy"
             class="h-full w-full object-cover"
           />
         </div>
