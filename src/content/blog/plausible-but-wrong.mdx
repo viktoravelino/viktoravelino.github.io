@@ -1,0 +1,64 @@
+---
+title: "Plausible But Wrong"
+description: "AI coding agents are great at generating code. The problem is they're generating code for a problem you didn't fully describe. Spec-driven development fixes that — and it's simpler than it sounds."
+date: 2026-03-19
+tags: ["ai", "software-engineering", "developer-tools"]
+coverImage: "/images/blog/plausible-but-wrong.png"
+---
+
+My AI agent shipped clean code this morning. Well-structured, readable, sensible variable names. It was also missing half the edge cases I'd implicitly had in my head.
+
+Not hallucinated code. Not broken code. Just... code for a problem I didn't fully describe.
+
+---
+
+There's a term for this: the "specification gap." The model isn't the bottleneck — your spec is. Or more precisely, the fact that you don't have one.
+
+When you prompt an AI agent to build something, it takes your natural-language description, makes a bunch of reasonable assumptions about what you meant, and produces syntactically valid code that satisfies those assumptions. The problem is "reasonable assumptions" isn't the same as "correct." And the more complex the task, the more assumptions get stacked. Edge cases get missed. Auth flows get simplified. Input validation gets handwaved. Not because the model is bad — because you never told it those things mattered.
+
+Most developers treat AI like autocomplete on steroids. You describe roughly what you want, read the output, iterate. That loop works. But it's built on hope — hope that your description was specific enough, hope that the model's assumptions aligned with yours, hope that you'll catch anything that slipped through.
+
+---
+
+Spec-driven development is the fix. And it's not a new idea — it just finally makes sense to do now.
+
+The workflow: before you prompt your agent for any implementation, you write the spec. Not a comment in a file. A formal, machine-checkable contract. An OpenAPI schema if you're building an API. A Gherkin scenario if you're describing behavior. A Protocol Buffer definition if you're dealing with data contracts. Something that can be verified, not just read.
+
+Then you hand that to the agent. *Implement this.* Not "build me a user auth flow" — here's the exact contract: these are the endpoints, these are the request shapes, these are the error cases, this is what a valid token looks like. Go.
+
+The quality difference is real. When the agent has a spec, it's filling in code, not intent. When it doesn't have a spec, it's guessing your intent and writing code around the guess. Those two things produce very different outputs.
+
+---
+
+Here's the part that's easy to miss: specs aren't just about quality. They're about security.
+
+When you let an agent fill in blanks — and there are always blanks — it makes decisions. It decides how to handle malformed input. It decides what gets logged. It decides what an error response looks like. Those decisions are usually fine. Sometimes they're not. And the scary part is you often won't catch it in review, because you're reviewing against your mental model of what you wanted, not against a written contract.
+
+A poisoned input that gets echoed into a query. A default auth behavior that's technically fine for a toy but wrong for production. Missing rate limiting on an endpoint because the prompt never mentioned it needed any. These aren't spectacular failures. They're exactly the kind of "plausible but wrong" that doesn't get caught until it matters.
+
+Write the spec first and you've defined the contract. The agent implements the contract. Your review is now checking an implementation against a written thing, not a remembered thing.
+
+---
+
+The discipline here isn't process for its own sake. It's a clear division of labor.
+
+You do the design. You write down what the system should do, precisely. The agent does the execution — it turns that description into code. If you skip the first step, you're not really doing the design. You're doing it informally in your head and hoping the agent reads it correctly.
+
+That hope is load-bearing. And it's been doing more work than most people realize.
+
+Write the spec. Let the agent implement it. Review the code against the spec, not against what you were picturing.
+
+The agent didn't guess wrong. You just forgot to tell it.
+
+---
+
+import ArticleCard from "../../components/ArticleCard.astro";
+
+## Further Reading
+
+<ArticleCard
+  url="https://arxiv.org/abs/2602.00180"
+  title="Spec-Driven Development in the Age of AI Coding Assistants"
+  description="How writing formal specifications before prompting AI agents can bridge the gap between developer intent and machine implementation — and why most developers are skipping it."
+  source="arxiv.org"
+/>
