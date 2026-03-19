@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('base.css');
+
+  :root {
+    --accent-rgb: 220, 38, 38;
+    --accent2-rgb: 90, 158, 111;
+    --blob1-alpha: 0.22;
+    --blob2-alpha: 0.10;
+    --h1-size: 72px;
+    --sub-size: 13px;
+    --content-max-w: 620px;
+    --divider-left: 720px;
+    --panel-line-height: 1.75;
+    --panel-header-mb: 14px;
+  }
+
+  .panel-comment {
+    display: block;
+    font-style: italic;
+    color: rgba(255,255,255,0.12);
+    white-space: pre;
+    margin-bottom: 2px;
+  }
+
+  .panel-bad {
+    display: block;
+    white-space: pre;
+    color: rgba(220, 38, 38, 0.75);
+    background: rgba(220, 38, 38, 0.07);
+    border-left: 2px solid rgba(220, 38, 38, 0.4);
+    padding-left: 6px;
+    margin-left: -8px;
+    margin-bottom: 12px;
+  }
+
+  .panel-good-line {
+    display: block;
+    white-space: pre;
+    color: rgba(var(--accent2-rgb), 0.75);
+    background: rgba(var(--accent2-rgb), 0.07);
+    border-left: 2px solid rgba(var(--accent2-rgb), 0.35);
+    padding-left: 6px;
+    margin-left: -8px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">AI Agents · Mar 2026</div>
+    <h1>Plausible<br><em>But Wrong</em></h1>
+    <p class="sub">The agent didn't guess wrong.<br>You just forgot to tell it.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
+      auth.yaml
+    </div>
+
+    <span class="panel-comment"># what you prompted:</span>
+    <span class="panel-bad">"build me a user auth flow"</span>
+
+    <span class="panel-comment"># what the agent assumed:</span>
+    <span class="line bright">error_response: <span style="color:rgba(220,180,60,0.7)">200 OK  # sure, why not</span></span>
+    <span class="line bright">rate_limiting:  <span style="color:rgba(220,180,60,0.7)">none    # never mentioned</span></span>
+    <span class="line bright">token_expiry:   <span style="color:rgba(220,180,60,0.7)">never   # reasonable?</span></span>
+    <span class="line"> </span>
+
+    <span class="panel-comment"># what the spec says:</span>
+    <span class="panel-good-line">POST /auth/token:</span>
+    <span class="panel-good-line">  200: { token, expires_in: 3600 }</span>
+    <span class="panel-good-line">  401: { error: "invalid_credentials" }</span>
+    <span class="panel-good-line">  429: { error: "rate_limit_exceeded" }</span>
+    <span class="panel-good-line">  x-rate-limit: 10/min</span>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">arxiv:2602.00180 · spec-driven development · 2026</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>
