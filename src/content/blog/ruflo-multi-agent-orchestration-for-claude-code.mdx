@@ -1,0 +1,73 @@
+---
+title: "Ruflo: Multi-Agent Orchestration for Claude Code"
+description: "If you've been using Claude Code and wished you could throw more than one agent at a problem, Ruflo is worth a look. 60+ specialized agents, self-learning routing, and a clever cost optimization trick."
+date: 2026-03-23
+tags: ["ai", "developer-tools", "open-source"]
+coverImage: "/images/blog/ruflo-multi-agent-orchestration-for-claude-code.png"
+---
+
+If you've been using Claude Code and wished you could throw more than one agent at a problem, Ruflo is worth a look.
+
+It's an open-source orchestration platform that sits on top of Claude Code and lets you spin up coordinated teams of specialized agents — coders, testers, reviewers, architects — working in parallel instead of one at a time. There are 60+ pre-built agents out of the box, and the whole thing plugs in through MCP, so it feels native.
+
+---
+
+The setup is dead simple. One line:
+
+```bash
+npx ruflo@latest init --wizard
+```
+
+Or if you want the full integration with Claude Code's MCP:
+
+```bash
+claude mcp add ruflo -- npx ruflo@latest mcp start
+```
+
+That's it. You're running.
+
+From there you can spawn agents for specific tasks, coordinate them into swarms, or let the system figure out who should do what. Want a full dev team working on a feature? One command:
+
+```bash
+npx ruflo@latest hive-mind spawn "Implement user auth system"
+```
+
+A "queen" agent breaks down the work, assigns it to worker agents, and coordinates through shared memory and consensus. It even handles Byzantine fault tolerance — if an agent returns garbage, the swarm still converges on a correct result.
+
+---
+
+What I find most interesting is the cost side. Ruflo doesn't treat every task like it needs a frontier model. It classifies complexity into three tiers:
+
+- **Simple** (var-to-const, adding types, async wrapping) — handled by WebAssembly transforms. No LLM call. Sub-millisecond. Zero cost.
+- **Medium** — routed to lighter models like Haiku.
+- **Complex** — full agent swarms with Opus or whatever you configure.
+
+They claim 75% reduction in API costs, which makes sense when you think about how many "tasks" in a typical coding session are really just mechanical transforms.
+
+It's not locked to Claude either. You can route across GPT, Gemini, Cohere, or local models with automatic failover. The routing engine (SONA) makes decisions in under 0.05ms, so the overhead is basically invisible.
+
+---
+
+The self-learning bit is worth mentioning too. Successful patterns get stored in a vector database and reused for similar tasks later. So the system genuinely gets faster and smarter the more you use it. You can even search your pattern memory:
+
+```bash
+npx ruflo@latest memory search --query "authentication patterns"
+```
+
+A few other things that caught my eye:
+
+- **Swarm topologies**: hierarchical, mesh, ring, or star — depending on the task
+- **259+ MCP tools** exposed directly in Claude Code
+- **Built-in security**: input validation, prompt injection blocking, command sandboxing
+- **Performance benchmarks** you can run yourself: `npx ruflo@latest performance benchmark`
+
+Requirements are minimal — Node.js 20+ and an API key. Global install if you prefer:
+
+```bash
+npm install -g ruflo@latest
+ruflo init
+```
+
+The repo is at [github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo) with 5,900+ commits, so this isn't a weekend project. It's actively developed and moving fast.
+
+If you're using Claude Code for anything beyond simple edits, this is the kind of tooling that makes you wonder why we've been running single agents for so long.
