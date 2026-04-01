@@ -1,0 +1,51 @@
+---
+title: "What 90% AI-Assisted Actually Looks Like in Practice"
+description: "4 months, 38 merged PRs, 18k+ lines across a massive open-source codebase. Here's what working 90% AI-assisted on Langflow actually felt like — the good, the real, and the things nobody talks about."
+date: 2026-03-31
+tags: ["ai", "developer-tools", "open-source", "productivity"]
+coverImage: "/images/blog/what-90-percent-ai-assisted-looks-like-in-practice.png"
+---
+
+I've been contributing to Langflow — IBM's open-source visual framework for building AI agents — since December 2025. About four months. In that time I've opened 52 pull requests, merged 38 of them, touched 241+ files, and shipped north of 18,000 lines of code across features, bug fixes, refactors, and security patches.
+
+And roughly 90% of that work was AI-assisted.
+
+Not "AI generated." Not "vibe coded." Assisted. There's a difference, and it matters more than people think.
+
+---
+
+Here's the raw breakdown. 7 features. 28 bug fixes. 3 refactors. The features ranged from building a full guardrails component from scratch to a deployment page with watsonx Orchestrate integration, token usage tracking for LLM and Agent components, edge context menus, ZIP file upload support. The bug fixes covered everything from a ReDoS vulnerability in mustache template validation to Safari scroll jitter, shared reference mutations, and test stabilization across multiple CI shards.
+
+That's a lot of surface area for four months. And it ramped fast — 4 PRs in December, 10 in January, 12 in February, 12 in March. Not because I suddenly got smarter. Because the workflow got tighter.
+
+---
+
+What does 90% AI-assisted actually mean day to day? It means the AI is in the loop at almost every step — researching the codebase, drafting implementations, writing tests, catching edge cases I'd have missed on the first pass. But I'm still the one deciding *what* to build, *how* to approach it, and whether the output is actually correct.
+
+The biggest unlock wasn't speed of writing code. It was speed of *understanding* code. Langflow is a massive codebase. Jumping into an unfamiliar repo and being productive within days instead of weeks — that's the thing AI made possible. I could ask questions about patterns, trace data flows, understand component relationships, and then actually make informed changes instead of guessing and hoping the tests catch my mistakes.
+
+The second biggest unlock was iteration speed. When you can go from "I think the bug is here" to a working fix with tests in 30 minutes instead of half a day, you try more things. You explore more approaches. You don't get precious about your first idea because the cost of trying a second one dropped to almost nothing.
+
+---
+
+But here's the part nobody talks about: AI-assisted doesn't mean AI-reliable. Not automatically.
+
+Some of my contributions were specifically about making AI-driven workflows more stable. Test stabilization across multiple shards. Fixing flaky behavior that only showed up in CI. Making sure components handled edge cases — non-ASCII filenames, shared reference mutations, browser-specific quirks — that AI-generated code tends to miss on the first pass.
+
+Beyond fixing the output, I also worked on fixing the *process*. I contributed skills files and rules files to the project's AI workflow — things like coding standards, commit conventions, and context rules that give the AI better guardrails before it even starts writing code. The idea is simple: if you can encode what "good" looks like into the workflow itself, the AI's first pass gets closer to correct every time. Less back-and-forth. Fewer "plausible but wrong" suggestions. More consistent output across the whole team, not just one developer's session.
+
+That's the irony. Using AI to ship faster also means you need to be more rigorous about what you're shipping. The iteration speed is a gift, but it compounds bugs just as fast as it compounds features if you're not careful. I spent almost as much time fixing things, stabilizing tests, and improving the AI workflow itself as I did building new features. That ratio — 28 bug fixes to 7 features — isn't a failure. It's what responsible delivery looks like when you're moving fast.
+
+---
+
+The session management refactor is a good example of how this works in practice. I extracted session management into a dedicated store and hook — 552 additions, 426 deletions, 17 files touched. That's the kind of architectural cleanup that's tedious to do manually but where AI shines. It can trace all the usages, suggest the new structure, and help you migrate everything without missing a reference. The actual design decision — "this should be a dedicated store" — was mine. The execution was collaborative.
+
+Same with the inspection panel and playground overhaul. 511 additions, 399 deletions, 47 files. A refactor that big would've taken me a week or more working solo. With AI in the loop, it was a few days, and the result was cleaner because I could iterate on the approach faster.
+
+---
+
+I want to be honest about what this is and what it isn't. This isn't a story about AI replacing developers. I'm a developer who used AI tools to punch above my weight in a codebase I didn't build, contributing meaningful work in a fraction of the time it would've taken otherwise.
+
+The 90% number sounds dramatic. In practice, it just means the AI is always there — like having a really fast pair programmer who knows the entire codebase but sometimes hallucinates about edge cases. You still need to know what good code looks like. You still need to understand the architecture. You still need to catch the things the AI gets plausibly wrong.
+
+38 merged PRs in four months on an open-source project this size. That's not the AI's number. It's mine. The AI just made it possible.
