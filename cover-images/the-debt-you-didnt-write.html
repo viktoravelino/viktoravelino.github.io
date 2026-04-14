@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('base.css');
+
+  :root {
+    --accent-rgb: 234, 179, 8;
+    --accent2-rgb: 139, 92, 246;
+    --blob1-alpha: 0.18;
+    --blob2-alpha: 0.10;
+    --h1-size: 68px;
+    --sub-size: 13px;
+    --content-max-w: 620px;
+    --divider-left: 720px;
+    --panel-line-height: 1.7;
+    --panel-header-mb: 14px;
+  }
+
+  .panel-ok {
+    display: block;
+    white-space: pre;
+    color: rgba(74, 222, 128, 0.6);
+    margin-bottom: 2px;
+  }
+
+  .panel-warn {
+    display: block;
+    white-space: pre;
+    color: rgba(234, 179, 8, 0.7);
+    background: rgba(234, 179, 8, 0.06);
+    border-left: 2px solid rgba(234, 179, 8, 0.35);
+    padding-left: 6px;
+    margin-left: -8px;
+    margin-bottom: 2px;
+  }
+
+  .panel-dim {
+    display: block;
+    white-space: pre;
+    color: rgba(255, 255, 255, 0.12);
+    margin-bottom: 2px;
+  }
+
+  .panel-section {
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">AI · Tech Debt · Apr 2026</div>
+    <h1>The Debt<br>You <em>Didn't</em><br>Write</h1>
+    <p class="sub">It passes review. It passes tests.<br>Nobody can explain how it works.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
+      debt-audit.log
+    </div>
+
+    <span class="panel-ok">✓ lint          passed</span>
+    <span class="panel-ok">✓ types         passed</span>
+    <span class="panel-ok">✓ tests         48/48 passed</span>
+    <span class="panel-ok">✓ review        approved</span>
+    <span class="panel-dim">─────────────────────────</span>
+
+    <div class="panel-section">
+      <span class="panel-warn">⚠ patterns      3 inconsistencies</span>
+      <span class="panel-warn">⚠ abstractions  2 unowned hooks</span>
+      <span class="panel-warn">⚠ understanding  "I think it works?"</span>
+      <span class="panel-warn">⚠ can-rewrite   no</span>
+    </div>
+
+    <span class="panel-dim"> </span>
+    <span class="line dim">// the code is fine.</span>
+    <span class="line dim">// the understanding is missing.</span>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">ai-assisted debt · patterns · understanding</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>

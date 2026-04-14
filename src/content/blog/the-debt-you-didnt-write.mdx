@@ -1,0 +1,73 @@
+---
+title: "The Debt You Didn't Write"
+description: "AI-assisted coding is creating a new kind of tech debt — not from bad code, but from code nobody on the team fully understands. And it compounds faster than you think."
+date: 2026-04-14
+tags: ["ai", "software-engineering", "productivity"]
+coverImage: "/images/blog/the-debt-you-didnt-write.png"
+---
+
+I've shipped over 150,000 lines of AI-assisted code in the last six months. I've talked about how that workflow works, what the numbers look like, why it's real productivity and not just vibes. I believe all of that. I also believe I've been accumulating a kind of debt that didn't exist two years ago.
+
+Not the "AI writes bad code" kind. The code is fine. It passes review, it passes tests, it works in production. The debt is quieter than that.
+
+---
+
+## The Patchwork Problem
+
+Here's what I started noticing around month three. I'd open a file I hadn't touched in a few weeks and find patterns I didn't recognize. Not bad patterns — just *different* ones. A custom hook that handled errors one way in this component, another way in that one. A fetch wrapper here, a raw `useEffect` there. State management approaches that were each individually reasonable but collectively incoherent.
+
+Every AI session starts fresh. It reads the surrounding code, makes reasonable choices, and produces something that works. But "reasonable" isn't the same as "consistent." Over dozens of sessions, across different prompts and different days, the codebase quietly becomes a patchwork. No single file is wrong. The whole thing just... doesn't feel like one person wrote it.
+
+Because nobody did.
+
+---
+
+## Cargo-Culted Sophistication
+
+This one's subtle. AI-generated code often *looks* more sophisticated than what you'd write yourself. Complex custom hooks with memoization. Elegant error boundaries. Retry logic with exponential backoff. It reads well. It passes review. It's also code that nobody on the team actually understands at the level required to debug it when it breaks.
+
+Traditional tech debt is code you wrote too quickly and didn't clean up. You know it's messy because *you* made it messy. You can find the shortcuts because you took them. This is different. This is code that arrived fully formed, looking polished, and nobody ever had the understanding that comes from building it piece by piece.
+
+When it breaks — and it does — the debugging experience is different. You're not tracing your own logic. You're reverse-engineering someone else's. Except there is no someone else.
+
+---
+
+## The Understanding Gap
+
+I keep coming back to something I wrote a few months ago about speed without synthesis. The core idea was that shipping fast doesn't automatically mean learning. That's true, but I think the problem goes deeper than I realized.
+
+When I write code myself, I build a mental model as I go. I understand *why* this function takes these arguments, why this state lives here and not there, why the error handling works this way. When the AI writes it and I review it, I get a surface-level read. Enough to approve it. Not always enough to maintain it.
+
+That gap — between "I reviewed this" and "I understand this" — is the new tech debt. It's not in the code. It's in your head. Or more precisely, it's *not* in your head. Traditional debt is code you wrote poorly. This is code you never understood in the first place.
+
+---
+
+## The Compound Problem
+
+Here's the part that keeps me up at night. AI agents use your existing code as context. They look at what's already in the repo and pattern-match against it. If your codebase already has inconsistent patterns — because three months of AI sessions produced three slightly different approaches — the agent will learn from that inconsistency and propagate it.
+
+Bad patterns don't just sit there. They multiply. The agent sees your cargo-culted hook abstraction, decides that's the pattern, and builds six more components on top of it. Now you don't just have one thing you don't understand. You have a dependency tree of things you don't understand.
+
+This is how you end up with a codebase that works fine until it doesn't, and when it doesn't, nobody can explain why.
+
+---
+
+## What I'm Actually Doing About It
+
+I'm not going to end this with "be more careful." That's not a strategy. Here's what I've actually started doing.
+
+**Pattern reviews, not just code reviews.** Once a week I scan recent PRs not for bugs or logic, but for consistency. Are we handling errors the same way? Are new hooks following existing conventions? If I spot drift, I fix it before the agent learns from it.
+
+**Understanding checks.** Before I approve AI-generated code, I ask myself: could I rewrite this from scratch if I needed to? If the answer is no, I don't just approve it — I sit with it until I actually understand the approach, not just the output.
+
+**Fewer abstractions.** I've started explicitly telling the agent not to create new patterns. Use the existing hook. Follow the existing error handling. Don't be clever. The boring, repetitive version is better than a new abstraction I'll forget I have in two weeks.
+
+**Spec-driven boundaries.** I wrote about this before — writing specs before prompting. It helps here too. When the spec defines the contract, the agent has less room to invent patterns. Less invention means less drift.
+
+None of this slows me down much. It's maybe 15 minutes a day of deliberate attention. The alternative is six months from now staring at a codebase that works but nobody can explain.
+
+---
+
+That's the thing about this new debt. It doesn't look like debt. It looks like clean, well-structured, passing-all-tests code. The invoice comes later, when you need to change it and realize you never understood it well enough to touch it safely.
+
+The code is fine. The understanding is what's missing. And understanding doesn't ship itself.
