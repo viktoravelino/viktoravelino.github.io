@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('base.css');
+
+  :root {
+    --accent-rgb: 59, 130, 246;
+    --accent2-rgb: 34, 197, 94;
+    --blob1-alpha: 0.20;
+    --blob2-alpha: 0.10;
+    --h1-size: 64px;
+    --sub-size: 13px;
+    --content-max-w: 620px;
+    --divider-left: 720px;
+    --panel-line-height: 1.85;
+    --panel-header-mb: 14px;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .timeline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .timeline-dot.dim { background: rgba(255,255,255,0.12); }
+  .timeline-dot.mid { background: rgba(59,130,246,0.4); }
+  .timeline-dot.bright { background: rgba(59,130,246,0.8); }
+  .timeline-dot.green { background: rgba(34,197,94,0.8); }
+
+  .timeline-label {
+    display: block;
+    white-space: pre;
+    font-size: 12px;
+  }
+
+  .timeline-label .month {
+    color: rgba(255,255,255,0.3);
+    margin-right: 8px;
+  }
+
+  .timeline-label .desc {
+    color: rgba(255,255,255,0.15);
+  }
+
+  .timeline-label .desc.highlight {
+    color: rgba(59,130,246,0.7);
+  }
+
+  .timeline-label .desc.green {
+    color: rgba(34,197,94,0.7);
+  }
+
+  .timeline-label .stat {
+    display: block;
+    color: rgba(255,255,255,0.10);
+    margin-left: 48px;
+    font-size: 11px;
+  }
+
+  .timeline-connector {
+    width: 1px;
+    height: 12px;
+    background: rgba(255,255,255,0.06);
+    margin-left: 3.5px;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">Open Source · Apr 2026</div>
+    <h1>From <em>PR #1</em><br>to Feature<br>Owner</h1>
+    <p class="sub">4 months. 54 merged PRs. 12.5M-line codebase.<br>Started with a scroll bug.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
+      contribution.log
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot dim"></span>
+      <span class="timeline-label"><span class="month">Dec</span><span class="desc">first PR — 31 lines</span></span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot dim"></span>
+      <span class="timeline-label"><span class="month">Jan</span><span class="desc">10 PRs — bug fixes, refactors</span></span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot mid"></span>
+      <span class="timeline-label"><span class="month">Feb</span><span class="desc">12 PRs — features landing</span></span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot bright"></span>
+      <span class="timeline-label"><span class="month">Mar</span><span class="desc highlight">WxO deployment feature →</span></span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-dot green"></span>
+      <span class="timeline-label"><span class="month">Apr</span><span class="desc green">feature owner (frontend)</span>
+      <span class="stat">54 PRs · +61,644 lines · 10.5k test LOC</span></span>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">langflow · watsonx orchestrate · open source</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>

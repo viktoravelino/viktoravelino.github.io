@@ -1,0 +1,45 @@
+---
+title: "From PR #1 to Feature Owner in 4 Months"
+description: "Langflow 1.9 shipped yesterday with two features I built. Four months ago I'd never seen the codebase. Here's how that happened."
+date: 2026-04-15
+tags: ["ai", "open-source", "software-engineering", "developer-tools"]
+coverImage: "/images/blog/from-pr-1-to-feature-owner-in-4-months.png"
+---
+
+Langflow 1.9 shipped yesterday. Two of the features in the release notes are mine.
+
+One is the watsonx Orchestrate deployment integration — the entire frontend for deploying Langflow flows as tools inside IBM's orchestration platform. The other is token usage tracking — LLM components now show input and output token counts directly in the flow interface after you run them. Different scales of work, but both mine, both in the release, both things that didn't exist before I wrote them.
+
+Four months ago I'd never opened this codebase.
+
+---
+
+I keep staring at the release notes and feeling something I didn't expect. Not surprise — I knew these were coming. More like... recognition. Seeing your work listed in a major release alongside features from people who've been on this project for years. That's a specific kind of validation that open source gives you and nothing else does.
+
+My first PR on Langflow changed 31 lines. A scroll jitter bug in Safari. December 2025. I didn't understand the routing layer, barely knew where components lived, spent more time reading than writing. The kind of contribution you make when you're trying to learn how a codebase thinks.
+
+That's the part I keep coming back to. Those early PRs weren't just a warm-up period I had to get through. They were the reason March was possible. You can't build a deployment wizard with a four-step flow, tool name validation against an 18,000-item catalog, and a test modal with trace inspection if you don't understand how the app handles state. You learn that by fixing the boring stuff first.
+
+---
+
+The watsonx Orchestrate feature was the big one. Three weeks, eighteen PRs, all frontend. A deployment management page with expandable rows. A stepper wizard — pick a provider, configure the deployment, attach flows with version selection, review everything. A deploy button on the canvas that detects whether you're updating or creating. Delete with type-to-confirm. Feature flag gating. Empty states. Error handling.
+
+Then the tests. Forty-three test files. Over 10,000 lines of test code — unit tests for API hooks, component rendering tests, custom hook tests, Playwright end-to-end specs covering 32 scenarios. That ratio isn't accidental. When you're the new person shipping this fast, the tests are how you prove the work is solid. They're not a chore at the end. They're the thing that makes everything before them trustworthy.
+
+I got that feature because I'd already shipped 40-something PRs of bug fixes and refactors. Nobody handed it to me as a favor. The team watched the work, saw the consistency, and trusted the trajectory. That trust gets earned in bug fixes, not feature proposals.
+
+---
+
+Token usage was a different kind of work. Less surface area, more depth. LLM components in Langflow now expose input and output token counts right in the flow interface after execution. It sounds simple when you say it in one sentence, but the implementation touches how component outputs surface data, how the UI renders execution results, and how users actually understand what their flows are consuming.
+
+It's the kind of feature where the best version is the one users barely notice — it's just *there*, exactly where you'd expect it, showing you what you need without making you go find it. I'm proud of that one in a different way than the deployment feature. Less spectacle, more craft.
+
+---
+
+Fifty-four merged PRs. Over 61,000 lines added. Two features in a major release. A 10,500-line test suite. On a codebase with 12.5 million lines that I first opened in December.
+
+The AI-assisted workflow made the velocity possible — I've talked about the 90% number before, and it's real. But the AI didn't get my name in those release notes. It didn't fix the scroll bugs, learn the patterns, earn the trust, or make the judgment calls about what to build and how to build it. I did that part. The AI just made it possible to do it in four months instead of twelve.
+
+There's something about seeing your work ship in a release that changes how it feels. The PRs were satisfying when they merged. The tests passing felt good. But seeing "token usage" and "watsonx Orchestrate deployment" in the 1.9 announcement, knowing those are yours — that's the moment it clicks. You're not just contributing to an open source project. You're shaping what it becomes.
+
+Four months and 31 lines ago, I was reading code I didn't understand. Yesterday, some of that code shipped to everyone.
