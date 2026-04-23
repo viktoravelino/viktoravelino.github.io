@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('base.css');
+
+  :root {
+    --accent-rgb: 248, 113, 113;
+    --accent2-rgb: 56, 189, 248;
+    --blob1-alpha: 0.17;
+    --blob2-alpha: 0.09;
+    --h1-size: 70px;
+    --sub-size: 13px;
+    --content-max-w: 610px;
+    --divider-left: 715px;
+    --panel-font-size: 12px;
+    --panel-line-height: 1.72;
+    --panel-header-mb: 14px;
+  }
+
+  .panel-danger {
+    display: block;
+    white-space: pre;
+    color: rgba(248, 113, 113, 0.78);
+    background: rgba(248, 113, 113, 0.07);
+    border-left: 2px solid rgba(248, 113, 113, 0.42);
+    padding-left: 6px;
+    margin-left: -8px;
+    margin-bottom: 3px;
+  }
+
+  .panel-ok {
+    display: block;
+    white-space: pre;
+    color: rgba(125, 211, 252, 0.55);
+    margin-bottom: 3px;
+  }
+
+  .panel-dim {
+    display: block;
+    white-space: pre;
+    color: rgba(255, 255, 255, 0.12);
+    margin-bottom: 3px;
+  }
+
+  .prompt {
+    color: rgba(255, 255, 255, 0.22);
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    margin-left: 4px;
+    background: rgba(var(--accent-rgb), 0.72);
+    vertical-align: -2px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">AI · Security · Apr 2026</div>
+    <h1>The Agent<br>Has <em>Root</em><br>Access</h1>
+    <p class="sub">Tools are not harmless integrations.<br>They are execution boundaries.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
+      agent-permissions.audit
+    </div>
+
+    <span class="panel-ok">✓ repo.read        granted</span>
+    <span class="panel-ok">✓ browser.open     granted</span>
+    <span class="panel-ok">✓ github.pr        granted</span>
+    <span class="panel-danger">! shell.exec      broad</span>
+    <span class="panel-danger">! fs.write        workspace</span>
+    <span class="panel-danger">! tokens          inherited</span>
+    <span class="panel-dim">──────────────────────────</span>
+    <span class="line dim">// prompt says: "look into it"</span>
+    <span class="line dim">// harness says: "run command"</span>
+    <span class="line dim">// security says: "wait."</span>
+    <span class="panel-dim"> </span>
+    <span class="prompt">$ mcp connect tools.json<span class="cursor"></span></span>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">mcp · permissions · threat models</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>
