@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Image</title>
+<style>
+  @import url('base.css');
+
+  :root {
+    --accent-rgb: 34, 197, 94;
+    --accent2-rgb: 14, 165, 233;
+    --blob1-alpha: 0.15;
+    --blob2-alpha: 0.10;
+    --h1-size: 64px;
+    --sub-size: 13px;
+    --content-max-w: 640px;
+    --divider-left: 735px;
+    --panel-font-size: 12px;
+    --panel-line-height: 1.68;
+    --panel-header-mb: 14px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    align-items: start;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.34);
+  }
+
+  .step-number {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(var(--accent-rgb), 0.38);
+    color: rgba(var(--accent-rgb), 0.85);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .step strong {
+    display: block;
+    color: rgba(255, 255, 255, 0.68);
+    font-weight: 700;
+    margin-bottom: 1px;
+  }
+
+  .step span {
+    display: block;
+    color: rgba(255, 255, 255, 0.18);
+  }
+
+  .handoff {
+    color: rgba(125, 211, 252, 0.55);
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <div class="content">
+    <div class="tag">AI · How-To · May 2026</div>
+    <h1>Hand Work<br>to an <em>AI Agent</em><br>Without a Mess</h1>
+    <p class="sub">The new skill is not prompting harder.<br>It's packaging work so the diff comes back reviewable.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-dot"></span>
+      agent-handoff.playbook
+    </div>
+
+    <div class="step">
+      <span class="step-number">01</span>
+      <span><strong>Research first</strong><span>no edits until plan is clear</span></span>
+    </div>
+    <div class="step">
+      <span class="step-number">02</span>
+      <span><strong>Bound the task</strong><span>small target, visible stop point</span></span>
+    </div>
+    <div class="step">
+      <span class="step-number">03</span>
+      <span><strong>Work on branch</strong><span>PR only after shape is sane</span></span>
+    </div>
+    <div class="step">
+      <span class="step-number">04</span>
+      <span><strong>Review like owner</strong><span>agent wrote it, you ship it</span></span>
+    </div>
+
+    <div class="handoff">
+      $ agent run --plan-first --branch-only
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span class="bottom-left">codex · copilot cloud agent · delegation</span>
+    <span class="bottom-right">dev blog</span>
+  </div>
+</div>
+</body>
+</html>
